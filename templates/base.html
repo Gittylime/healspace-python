@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Healspace Therapy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="H-H-J Healspace Logo" class="logo-image">
+            <span class="logo-text">H-H-J Healspace</span>
+        </div>
+        <nav>
+            <a href="{{ url_for('index') }}" class="nav-button">Home</a>
+            <a href="{{ url_for('user_login') }}" class="nav-button">User Login</a>
+            <a href="{{ url_for('user_register') }}" class="nav-button">User Register</a>
+            <a href="{{ url_for('therapist_login') }}" class="nav-button">Therapist Login</a>
+            <a href="{{ url_for('therapist_register') }}" class="nav-button">Therapist Register</a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}" class="nav-button">Logout</a>
+            {% endif %}
+        </nav>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

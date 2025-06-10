@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}User Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ current_user.name }}</h2>
+<h3>Your Sessions</h3>
+<ul>
+    {% for session in sessions %}
+        <li>{{ session.date }} with {{ session.therapist.name }} - Status: {{ session.status }}</li>
+    {% endfor %}
+</ul>
+<h3>Available Therapists</h3>
+<div>
+    {% for therapist in therapists %}
+        <div class="card">
+            <h4>{{ therapist.name }}</h4>
+            <p>{{ therapist.specialty }}</p>
+            <button data-id="{{ therapist.id }}" data-url="{{ url_for('book_session', therapist_id=therapist.id) }}" onclick="handleAction(this, 'book_session')">Book Session</button>
+        </div>
+    {% endfor %}
+</div>
+<button data-id="{{ current_user.id }}" onclick="handleAction(this, 'user_profile')">View Profile</button>
+{% endblock %}

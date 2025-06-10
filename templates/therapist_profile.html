@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Therapist Profile{% endblock %}
+{% block content %}
+<h2>{{ therapist.name }}</h2>
+<p><strong>Specialty:</strong> {{ therapist.specialty }}</p>
+<p><strong>Bio:</strong> {{ therapist.bio }}</p>
+<button data-id="{{ therapist.id }}" onclick="handleAction(this, 'book_session')">Book Session</button>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Therapist Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ current_user.name }}</h2>
+<h3>Booked Sessions</h3>
+<ul>
+    {% for session in sessions %}
+        <li>{{ session.date }} with {{ session.user.name }} - Status: {{ session.status }}
+            {% if session.status == 'pending' %}
+                <button data-id="{{ session.id }}" data-action="accepted" data-url="{{ url_for('session_action', session_id=session.id, action='accepted') }}" onclick="handleAction(this, 'session_action')">Accept</button>
+                <button data-id="{{ session.id }}" data-action="declined" data-url="{{ url_for('session_action', session_id=session.id, action='declined') }}" onclick="handleAction(this, 'session_action')">Decline</button>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

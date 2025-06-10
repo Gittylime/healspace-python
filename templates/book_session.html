@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Book Session{% endblock %}
+{% block content %}
+<h2>Book a Session with {{ therapist.name }}</h2>
+<form method="POST">
+    <input type="datetime-local" name="date" required>
+    <button type="submit">Book</button>
+</form>
+{% endblock %}
